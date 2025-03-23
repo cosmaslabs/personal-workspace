@@ -1,0 +1,101 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature!
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      description: Which project is this feature request for?
+      options:
+        - AI Crypto Price Predictor
+        - Document Digitization OCR System
+        - University Marketing Analytics Tool
+        - NocoBase Backend
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: "Example: I'm always frustrated when [...]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: "A clear and concise description of what you want to happen..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions you've considered
+      placeholder: "List any alternative solutions or features you've considered..."
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Details
+      description: If you have thoughts on how to implement this feature, share them here
+      placeholder: "Technical considerations, architecture changes, etc..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: What's the scope of this feature?
+      options:
+        - Small (few days)
+        - Medium (1-2 weeks)
+        - Large (2+ weeks)
+        - Not Sure
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Requirements
+      description: Features this would affect
+      options:
+        - label: UI Changes
+        - label: API Changes
+        - label: Database Changes
+        - label: Documentation Updates
+        - label: Testing Requirements
+        - label: Security Considerations
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the feature request here
+      placeholder: "Screenshots, diagrams, or additional information..."

@@ -1,0 +1,111 @@
+name: Documentation Update
+description: Suggest improvements or report issues in documentation
+title: "docs: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us improve our documentation!
+
+  - type: dropdown
+    id: project
+    attributes:
+      label: Project
+      description: Which project's documentation needs updating?
+      options:
+        - AI Crypto Price Predictor
+        - Document Digitization OCR System
+        - University Marketing Analytics Tool
+        - NocoBase Backend
+        - Repository/General Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs attention?
+      options:
+        - README
+        - API Documentation
+        - Installation Guide
+        - User Guide
+        - Developer Guide
+        - Configuration Guide
+        - Contributing Guidelines
+        - Architecture Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Documentation Location
+      description: Where is the documentation that needs updating?
+      placeholder: "Example: /docs/installation.md, Line 25"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Documentation
+      description: What does the current documentation say?
+      placeholder: "Copy the relevant section of documentation here..."
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Changes
+      description: What changes would you like to see?
+      placeholder: "Describe your proposed changes..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason for Change
+      description: Why should this documentation be updated?
+      placeholder: "Example: Current documentation is outdated/unclear/incomplete..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: Affected Areas
+      description: What areas of documentation are affected?
+      options:
+        - label: Code Examples
+        - label: Configuration Settings
+        - label: Setup Instructions
+        - label: API Endpoints
+        - label: Architecture Diagrams
+        - label: Screenshots/Images
+        - label: Error Messages/Troubleshooting
+        - label: Version Information
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this documentation update?
+      options:
+        - Critical (Documentation is incorrect/harmful)
+        - High (Major clarity/completeness issues)
+        - Medium (Improvements needed)
+        - Low (Minor enhancements)
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other context or information about the documentation update
+      placeholder: "Screenshots, references, or additional context..."

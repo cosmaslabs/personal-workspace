@@ -1,0 +1,4 @@
+[submodule "nocobase"]
+    path = nocobase
+    url = https://github.com/nocobase/nocobase.git
+    branch = main
