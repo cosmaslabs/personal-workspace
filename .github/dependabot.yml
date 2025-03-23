@@ -1,0 +1,93 @@
+version: 2
+updates:
+  # Python dependencies for AI Crypto Price Predictor
+  - package-ecosystem: "pip"
+    directory: "/projects/AI_Crypto_Price_Predictor"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "python"
+      - "crypto"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Python dependencies for Document OCR System
+  - package-ecosystem: "pip"
+    directory: "/projects/Document_Digitization_OCR_System"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "python"
+      - "ocr"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Python dependencies for Marketing Analytics Tool
+  - package-ecosystem: "pip"
+    directory: "/projects/University_Marketing_Analytics_Tool"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "python"
+      - "analytics"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # Node.js dependencies for NocoBase backend
+  - package-ecosystem: "npm"
+    directory: "/nocobase"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "javascript"
+      - "backend"
+    ignore:
+      # Ignore major version updates for these packages
+      - dependency-name: "@types/*"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
