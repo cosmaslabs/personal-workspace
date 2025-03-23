@@ -1,0 +1,152 @@
+# Version Control
+.git
+.gitignore
+.gitattributes
+.github
+.gitmodules
+
+# Environment and IDE
+.env*
+!.env.example
+.venv
+venv
+env
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+.pytest_cache
+.coverage
+htmlcov
+.tox
+.nox
+.hypothesis
+.mypy_cache
+
+# Node.js
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+.pnp.*
+coverage
+*.tsbuildinfo
+
+# Documentation
+docs/_build/
+site
+mkdocs.yml
+
+# Project specific
+*.log
+logs
+*.sqlite3
+*.db
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+temp/
+tmp/
+
+# Docker
+Dockerfile*
+docker-compose*
+.docker
+.dockerignore
+
+# CI/CD
+.travis.yml
+.circleci
+.gitlab-ci.yml
+.github/workflows
+
+# Development
+*.md
+!README.md
+!CHANGELOG.md
+LICENSE
+AUTHORS
+CONTRIBUTING.md
+SECURITY.md
+tests/
+test/
+testing/
+examples/
+scripts/
+tools/
+
+# Local configuration
+*.local
+local/
+.local/
+
+# Backup files
+*.bak
+*.backup
+*~
+*.old
+*.orig
+
+# Large files and archives
+*.zip
+*.gz
+*.tar
+*.rar
+*.7z
+*.iso
+*.dump
+*.sql
+*.dmp
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+*.p7b
+*.p7r
+*.srl
+*.csr
+
+# Media and binary files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.mov
+*.mp4
+*.mp3
+*.flv
+*.fla
+*.swf
+*.pdf
