@@ -1,0 +1,74 @@
+[flake8]
+max-line-length = 88
+extend-ignore = E203
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    *.egg-info,
+    venv,
+    .env,
+    .venv,
+    env,
+    .tox,
+    .pytest_cache,
+    .coverage,
+    htmlcov,
+    .mypy_cache
+
+# Match Black formatter
+max-complexity = 10
+statistics = True
+count = True
+
+# Docstring checks
+docstring-convention = google
+ignore =
+    # Missing docstring in public module
+    D100,
+    # Missing docstring in public class
+    D101,
+    # Missing docstring in public method
+    D102,
+    # Missing docstring in public function
+    D103,
+    # One-line docstring should fit on one line
+    D200,
+    # No blank lines allowed after function docstring
+    D202,
+    # First line should end with a period
+    D400,
+    # First line should be in imperative mood
+    D401
+
+per-file-ignores =
+    # Ignore imported but unused in __init__ files
+    __init__.py:F401
+    # Ignore assert statements in tests
+    test_*.py:S101
+    tests/*.py:S101
+    # Ignore complexity in tests
+    test_*.py:C901
+    tests/*.py:C901
+
+# Additional plugins
+require-plugins =
+    flake8-docstrings
+    flake8-import-order
+    flake8-bugbear
+    flake8-comprehensions
+    flake8-string-format
+
+# Import order settings
+import-order-style = google
+application-import-names =
+    ai_crypto_predictor
+    document_ocr
+    marketing_analytics
+
+# Other settings
+inline-quotes = single
+multiline-quotes = double
+docstring-quotes = double
+avoid-escaped-quotes = True
