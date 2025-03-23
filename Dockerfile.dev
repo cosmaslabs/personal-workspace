@@ -1,0 +1,79 @@
+# Development Dockerfile for AI-Driven Applications
+FROM python:3.9-slim as python-base
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    POETRY_VERSION=1.7.1 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv"
+
+# Add Poetry to PATH
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        build-essential \
+        git \
+        nodejs \
+        npm \
+        tesseract-ocr \
+        libtesseract-dev \
+    && curl -sSL https://install.python-poetry.org | python3 - \
+    && npm install -g yarn \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up working directory
+WORKDIR /app
+
+# Copy dependency files
+COPY requirements.txt ./
+COPY package.json package-lock.json ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Node.js dependencies
+RUN npm install
+
+# Copy project files
+COPY . .
+
+# Install Husky
+RUN npm run prepare
+
+# Set up project structure
+RUN mkdir -p \
+    logs \
+    data/crypto \
+    data/documents \
+    models/crypto
+
+# Expose ports
+EXPOSE 3000 8000 13000
+
+# Set up development environment
+ENV NODE_ENV=development \
+    PYTHON_ENV=development
+
+# Create entrypoint script
+RUN echo '#!/bin/bash\n\
+npm run dev & \
+python -m pytest --watch & \
+wait' > /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+
+# Set default command
+CMD ["/entrypoint.sh"]
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/health || exit 1
