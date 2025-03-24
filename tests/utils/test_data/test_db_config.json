@@ -1,0 +1,69 @@
+{
+    "databases": {
+        "crypto": {
+            "name": "crypto_test_db",
+            "host": "localhost",
+            "port": 5432,
+            "user": "test_user",
+            "password": "test_pass",
+            "tables": [
+                "cryptocurrency_prices",
+                "predictions",
+                "trading_signals",
+                "market_indicators"
+            ]
+        },
+        "ocr": {
+            "name": "ocr_test_db",
+            "host": "localhost",
+            "port": 5432,
+            "user": "test_user",
+            "password": "test_pass",
+            "tables": [
+                "documents",
+                "templates",
+                "extracted_data",
+                "processing_jobs"
+            ]
+        },
+        "analytics": {
+            "name": "analytics_test_db",
+            "host": "localhost",
+            "port": 5432,
+            "user": "test_user",
+            "password": "test_pass",
+            "tables": [
+                "campaigns",
+                "segments",
+                "metrics",
+                "reports"
+            ]
+        }
+    },
+    "redis": {
+        "host": "localhost",
+        "port": 6379,
+        "db": 1,
+        "password": null,
+        "cache_ttl": 3600,
+        "prefix": "test:"
+    },
+    "test_data": {
+        "batch_size": 100,
+        "cleanup_enabled": true,
+        "seed_enabled": true,
+        "mock_external_apis": true
+    },
+    "timeouts": {
+        "db_connection": 5,
+        "query_execution": 10,
+        "api_request": 3,
+        "cache_operation": 1
+    },
+    "retries": {
+        "db_connection": 3,
+        "api_request": 2,
+        "cache_operation": 1,
+        "delay_seconds": 0.5
+    }
+}
