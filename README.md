@@ -1,155 +1,202 @@
-# AI-Driven Applications Monorepo
+# AI-Driven Applications Suite
 
-[![CI](https://github.com/yourusername/repository/actions/workflows/main.yml/badge.svg)](https://github.com/yourusername/repository/actions/workflows/main.yml)
+A comprehensive suite of AI-powered applications for crypto price prediction, document digitization, and marketing analytics.
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![CI/CD](https://github.com/yourusername/repository/actions/workflows/main.yml/badge.svg)](https://github.com/yourusername/repository/actions)
+[![Documentation](https://readthedocs.org/projects/repository/badge/?version=latest)](https://repository.readthedocs.io/)
 
-This monorepo contains three AI-driven applications and a NocoBase backend integration:
+## Project Overview
 
-1. 🤖 **AI Crypto Price Predictor**: Advanced cryptocurrency price prediction system
-2. 📄 **Document Digitization OCR System**: Intelligent document processing and digitization
-3. 📊 **University Marketing Analytics Tool**: Data-driven marketing analytics platform
-4. 🔧 **NocoBase Backend**: Customized backend service integration
+This monorepo contains three main applications:
 
-## Project Structure
+1. **AI Crypto Price Predictor**
+   - Machine learning-based cryptocurrency price prediction
+   - Market sentiment analysis
+   - Real-time trading signals
+   - Historical data analysis
 
-```
-.
-├── projects/
-│   ├── AI_Crypto_Price_Predictor/        # BTC/ETH price prediction
-│   ├── Document_Digitization_OCR_System/ # Document processing
-│   └── University_Marketing_Analytics_Tool/ # Marketing analytics
-├── nocobase/                            # Backend service
-├── databases/                           # Database configurations
-├── docs/                               # Documentation
-├── logs/                              # Application logs
-└── scripts/                          # Utility scripts
-```
+2. **Document Digitization OCR System**
+   - Intelligent document processing
+   - Text extraction and analysis
+   - Document classification
+   - Data validation
+
+3. **University Marketing Analytics Tool**
+   - Customer segmentation
+   - Campaign performance analysis
+   - Predictive analytics
+   - ROI optimization
 
 ## Quick Start
 
 ### Prerequisites
 
-- Node.js >= 16.x
-- Python >= 3.9
-- Docker & Docker Compose
+- Python 3.9+
+- Node.js 16+
+- Docker and Docker Compose
 - Git
+- Make (optional)
 
-### Setup
+### Installation
 
-1. **Clone the Repository**
+1. Clone the repository:
 
    ```bash
    git clone --recursive https://github.com/yourusername/repository.git
    cd repository
    ```
 
-2. **Install Dependencies**
+2. Set up the development environment:
 
    ```bash
-   # Install JavaScript dependencies
-   npm install
-
-   # Install Python dependencies
-   pip install -r requirements.txt
+   ./scripts/dev_workflow.sh -w setup
    ```
 
-3. **Environment Setup**
+3. Start the services:
 
    ```bash
-   # Copy example env files
-   cp .env.example .env
+   ./scripts/dev_workflow.sh -w start
    ```
 
-4. **Start Development Servers**
+### Development
+
+1. Create a new feature branch:
 
    ```bash
-   npm run dev
+   git checkout -b feature/your-feature-name
    ```
 
-## Development
+2. Make your changes and run tests:
 
-### Commands
+   ```bash
+   ./scripts/project_manager.sh -a test
+   ```
 
-- `npm run dev` - Start all development servers
-- `npm run build` - Build all projects
-- `npm run test` - Run all tests
-- `npm run lint` - Lint all code
-- `npm run format` - Format all code
+3. Submit a pull request:
 
-### Project-Specific Commands
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
-#### AI Crypto Price Predictor
+## Documentation
 
-- `npm run dev:crypto` - Start crypto predictor development server
-- `npm run build:crypto` - Build crypto predictor
-- `npm run test:crypto` - Run crypto predictor tests
+- [Getting Started Guide](docs/development/getting_started.md)
+- [Architecture Overview](docs/architecture/overview.md)
+- [API Documentation](docs/api/README.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
 
-#### Document OCR System
+## Project Structure
 
-- `npm run dev:ocr` - Start OCR system development server
-- `npm run build:ocr` - Build OCR system
-- `npm run test:ocr` - Run OCR system tests
-
-#### Marketing Analytics Tool
-
-- `npm run dev:analytics` - Start analytics tool development server
-- `npm run build:analytics` - Build analytics tool
-- `npm run test:analytics` - Run analytics tool tests
-
-### Contributing
-
-Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
-
-#### Commit Convention
-
-We use [Conventional Commits](https://www.conventionalcommits.org/). You can use:
-
-```bash
-npm run commit
+```
+.
+├── projects/               # Application source code
+│   ├── AI_Crypto_Price_Predictor/
+│   ├── Document_Digitization_OCR_System/
+│   └── University_Marketing_Analytics_Tool/
+├── scripts/               # Development and automation scripts
+├── docs/                 # Documentation
+├── tests/                # Test suites
+├── logs/                 # Application logs
+└── backups/              # Backup storage
 ```
 
-This will guide you through the commit process using Commitizen.
+## Features
 
-### Documentation
+### AI Crypto Price Predictor
 
-- [GitHub Repository Strategy](docs/github-strategy.md)
-- [Development Guides](docs/)
-- [API Documentation](docs/api/)
-- [NocoBase Guide](docs/nocobase-guide.md)
+- Real-time price predictions
+- Technical analysis integration
+- Market sentiment analysis
+- Automated trading signals
+- Historical performance analysis
 
-## Security
+### Document OCR System
 
-For security issues, please see our [Security Policy](SECURITY.md).
+- Multiple document format support
+- Intelligent text extraction
+- Automated data validation
+- Custom document templates
+- Batch processing capability
 
-## Code of Conduct
+### Marketing Analytics Tool
 
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+- Customer behavior analysis
+- Campaign performance tracking
+- ROI optimization
+- Predictive modeling
+- Custom reporting
+
+## Technology Stack
+
+- **Frontend**:
+  - React.js
+  - TypeScript
+  - Material-UI
+  - Redux
+
+- **Backend**:
+  - Python/FastAPI
+  - Node.js/Express
+  - PostgreSQL
+  - Redis
+
+- **AI/ML**:
+  - TensorFlow
+  - PyTorch
+  - Scikit-learn
+  - NLTK
+
+- **Infrastructure**:
+  - Docker
+  - Kubernetes
+  - Nginx
+  - AWS/GCP
+
+## Contributing
+
+1. Review the [Contributing Guidelines](CONTRIBUTING.md)
+2. Fork the repository
+3. Create your feature branch
+4. Submit a pull request
+
+## Development Scripts
+
+```bash
+# Project management
+./scripts/project_manager.sh -p <project> -a <action>
+
+# Database operations
+./scripts/db_manager.sh -p <project> -a <action>
+
+# Docker management
+./scripts/docker_helper.sh -p <project> -a <action>
+
+# Environment setup
+./scripts/env_setup.sh -e <env> -a <action>
+
+# Dependency management
+./scripts/dependency_manager.sh -a <action> -s <scope>
+```
+
+## Support
+
+- [Issue Tracker](https://github.com/yourusername/repository/issues)
+- [Documentation](https://repository.readthedocs.io/)
+- [Discussion Forum](https://github.com/yourusername/repository/discussions)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## Authors
 
-For support:
-
-- Open an issue
-- Join our community Discord/Slack
-- Email support: [INSERT SUPPORT EMAIL]
+- **CosmasLabs** - *Initial work* - [Website](https://cosmaslabs.com)
+- See [AUTHORS](AUTHORS) for all contributors
 
 ## Acknowledgments
 
-- NocoBase team for the backend framework
-- All contributors and maintainers
-- Open source community
-
-## Status
-
-| Project | Status | Coverage |
-|---------|--------|----------|
-| AI Crypto Price Predictor | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | [![Coverage](https://img.shields.io/codecov/c/github/yourusername/repository/main.svg)]() |
-| Document OCR System | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | [![Coverage](https://img.shields.io/codecov/c/github/yourusername/repository/main.svg)]() |
-| Marketing Analytics | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | [![Coverage](https://img.shields.io/codecov/c/github/yourusername/repository/main.svg)]() |
-| NocoBase Backend | [![Status](https://img.shields.io/badge/status-active-success.svg)]() | [![Coverage](https://img.shields.io/codecov/c/github/yourusername/repository/main.svg)]() |
+- NocoBase Community
+- Open Source Contributors
+- Early Adopters and Testers
