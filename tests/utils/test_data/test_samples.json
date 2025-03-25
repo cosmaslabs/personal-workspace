@@ -1,132 +1,68 @@
 {
-    "crypto_samples": {
-        "prices": [
-            {
-                "symbol": "BTC/USD",
-                "price": 50000.00,
-                "timestamp": "2025-03-24T00:00:00Z",
-                "volume": 1000000.00,
-                "high": 51000.00,
-                "low": 49000.00,
-                "open": 49500.00,
-                "close": 50000.00
-            },
-            {
-                "symbol": "ETH/USD",
-                "price": 3000.00,
-                "timestamp": "2025-03-24T00:00:00Z",
-                "volume": 500000.00,
-                "high": 3100.00,
-                "low": 2900.00,
-                "open": 2950.00,
-                "close": 3000.00
-            }
-        ],
-        "predictions": [
-            {
-                "symbol": "BTC/USD",
-                "predicted_price": 52000.00,
-                "confidence": 0.85,
-                "timeframe": "24h",
-                "timestamp": "2025-03-25T00:00:00Z"
-            }
-        ]
-    },
-    "ocr_samples": {
-        "documents": [
-            {
-                "id": "doc_001",
-                "type": "invoice",
-                "content": "Sample invoice content for testing",
-                "metadata": {
-                    "date": "2025-03-24",
-                    "amount": 1500.00,
-                    "currency": "USD"
-                }
-            },
-            {
-                "id": "doc_002",
-                "type": "receipt",
-                "content": "Sample receipt content for testing",
-                "metadata": {
-                    "date": "2025-03-24",
-                    "total": 125.50,
-                    "store": "Test Store"
-                }
-            }
-        ],
-        "templates": [
-            {
-                "name": "invoice_template",
-                "fields": ["date", "amount", "currency", "vendor", "items"],
-                "required_fields": ["date", "amount"]
-            }
-        ]
-    },
-    "analytics_samples": {
-        "campaigns": [
-            {
-                "id": "camp_001",
-                "name": "Spring Campaign 2025",
-                "metrics": {
-                    "impressions": 100000,
-                    "clicks": 5000,
-                    "conversions": 250,
-                    "revenue": 12500.00,
-                    "roi": 2.5
-                },
-                "period": "2025-03"
-            }
-        ],
-        "segments": [
-            {
-                "id": "seg_001",
-                "name": "High Value Students",
-                "criteria": {
-                    "enrollment_status": "active",
-                    "gpa_range": [3.5, 4.0],
-                    "engagement_level": "high"
-                },
-                "size": 1000
-            }
-        ]
-    },
-    "users": [
+    "crypto_prices": [
         {
-            "id": "user_001",
-            "email": "test@example.com",
-            "name": "Test User",
-            "role": "admin",
-            "active": true
+            "id": "BTC_20240325",
+            "symbol": "BTC",
+            "price": 65432.10,
+            "timestamp": "2024-03-25T00:00:00Z",
+            "source": "test_exchange"
         },
         {
-            "id": "user_002",
-            "email": "user@example.com",
-            "name": "Regular User",
-            "role": "user",
-            "active": true
+            "id": "ETH_20240325",
+            "symbol": "ETH",
+            "price": 3456.78,
+            "timestamp": "2024-03-25T00:00:00Z",
+            "source": "test_exchange"
         }
     ],
-    "auth": {
-        "tokens": {
-            "valid": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyXzAwMSIsInJvbGUiOiJhZG1pbiJ9.secret",
-            "expired": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyXzAwMSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY0MzA0ODQwMH0.secret",
-            "invalid": "invalid.token.string"
-        }
-    },
-    "errors": {
-        "validation_error": {
-            "code": "VALIDATION_ERROR",
-            "message": "Invalid input parameters",
-            "details": {
-                "field": "amount",
-                "issue": "Must be positive number"
-            }
+    "documents": [
+        {
+            "id": "DOC001",
+            "title": "Test Document 1",
+            "content": "Sample document content for testing",
+            "created_at": "2024-03-25T00:00:00Z",
+            "status": "processed"
         },
-        "auth_error": {
-            "code": "UNAUTHORIZED",
-            "message": "Authentication required",
-            "details": null
+        {
+            "id": "DOC002",
+            "title": "Test Document 2",
+            "content": "Another sample document for testing",
+            "created_at": "2024-03-25T01:00:00Z",
+            "status": "pending"
         }
-    }
+    ],
+    "campaigns": [
+        {
+            "id": "CAM001",
+            "name": "Test Campaign 1",
+            "start_date": "2024-03-25",
+            "end_date": "2024-04-25",
+            "budget": 10000.00,
+            "status": "active"
+        },
+        {
+            "id": "CAM002",
+            "name": "Test Campaign 2",
+            "start_date": "2024-04-01",
+            "end_date": "2024-05-01",
+            "budget": 15000.00,
+            "status": "draft"
+        }
+    ],
+    "users": [
+        {
+            "id": "USR001",
+            "email": "test1@example.com",
+            "name": "Test User 1",
+            "role": "admin",
+            "created_at": "2024-03-25T00:00:00Z"
+        },
+        {
+            "id": "USR002",
+            "email": "test2@example.com",
+            "name": "Test User 2",
+            "role": "user",
+            "created_at": "2024-03-25T01:00:00Z"
+        }
+    ]
 }
