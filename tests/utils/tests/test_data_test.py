@@ -1,108 +1,138 @@
-"""Tests for test data validation."""
+"""Tests for test data validation schemas."""
 
-import json
-import os
 from datetime import datetime, timezone
+from decimal import Decimal
 
-from ..test_data.test_schemas import (Campaign, CryptoPrice, Document, User,
-                                      validate_test_data)
+import pytest
 
+from ..test_data.test_schemas import (
+    Campaign,
+    CampaignStatus,
+    CryptoPrice,
+    Document,
+    DocumentStatus,
+    User,
+    UserRole,
+    validate_test_data,
+)
 
 def test_crypto_price_schema():
-    """Test cryptocurrency price data schema."""
+    """Test crypto price validation."""
     valid_data = {
-        "symbol": "BTC/USD",
-        "price": 50000.00,
-        "timestamp": "2025-03-24T00:00:00Z",
-        "volume": 1000000.00,
-        "high": 51000.00,
-        "low": 49000.00,
-        "open": 49500.00,
-        "close": 50000.00
+        "id": "BTC_20240325",
+        "symbol": "BTC",
+        "price": Decimal("65432.10"),
+        "timestamp": datetime.now(timezone.utc),
+        "source": "test_exchange"
     }
-    price = CryptoPrice(**valid_data)
-    assert price.symbol == "BTC/USD"
-    assert price.price == 50000.00
+    crypto = CryptoPrice(**valid_data)
+    assert crypto.symbol == "BTC"
+    assert crypto.price == Decimal("65432.10")
 
+    # Test invalid data
+    with pytest.raises(ValueError):
+        CryptoPrice(
+            id="invalid_id",
+            symbol="B",  # Too short
+            price=Decimal("-100"),  # Negative price
+            timestamp=datetime.now(timezone.utc),
+            source="ex"  # Too short
+        )
 
 def test_document_schema():
-    """Test document schema."""
+    """Test document validation."""
     valid_data = {
-        "id": "doc_001",
-        "type": "invoice",
-        "content": "Test content",
-        "metadata": {
-            "date": "2025-03-24",
-            "amount": 1500.00,
-            "currency": "USD"
-        }
+        "id": "DOC001",
+        "title": "Test Document Title",
+        "content": "Sample document content for testing",
+        "created_at": datetime.now(timezone.utc),
+        "status": "processed"
     }
     doc = Document(**valid_data)
-    assert doc.id == "doc_001"
-    assert doc.type.value == "invoice"
+    assert doc.title == "Test Document Title"
+    assert doc.status == DocumentStatus.PROCESSED
 
+    # Test invalid data
+    with pytest.raises(ValueError):
+        Document(
+            id="INVALID",
+            title="Test",  # Too short
+            content="Too short",
+            created_at=datetime.now(timezone.utc),
+            status="invalid_status"  # Invalid enum value
+        )
 
 def test_campaign_schema():
-    """Test campaign schema."""
+    """Test campaign validation."""
+    start_date = datetime.now(timezone.utc)
+    end_date = datetime.now(timezone.utc)
     valid_data = {
-        "id": "camp_001",
-        "name": "Test Campaign",
-        "metrics": {
-            "impressions": 1000,
-            "clicks": 100,
-            "conversions": 10,
-            "revenue": 1000.00,
-            "roi": 2.5
-        },
-        "period": "2025-03"
+        "id": "CAM001",
+        "name": "Test Campaign Name",
+        "start_date": start_date,
+        "end_date": end_date,
+        "budget": Decimal("10000.00"),
+        "status": "active"
     }
     campaign = Campaign(**valid_data)
-    assert campaign.id == "camp_001"
-    assert campaign.name == "Test Campaign"
+    assert campaign.name == "Test Campaign Name"
+    assert campaign.status == CampaignStatus.ACTIVE
 
+    # Test invalid data
+    with pytest.raises(ValueError):
+        Campaign(
+            id="INVALID",
+            name="Test",  # Too short
+            start_date=end_date,
+            end_date=start_date,
+            budget=Decimal("-100"),  # Negative budget
+            status="invalid_status"  # Invalid enum value
+        )
 
 def test_user_schema():
-    """Test user schema."""
+    """Test user validation."""
     valid_data = {
-        "id": "user_001",
+        "id": "USR001",
         "email": "test@example.com",
         "name": "Test User",
         "role": "admin",
-        "active": True
+        "created_at": datetime.now(timezone.utc)
     }
     user = User(**valid_data)
-    assert user.id == "user_001"
-    assert user.role.value == "admin"
+    assert user.email == "test@example.com"
+    assert user.role == UserRole.ADMIN
 
+    # Test invalid data
+    with pytest.raises(ValueError):
+        User(
+            id="INVALID",
+            email="invalid_email",  # Invalid email format
+            name="Te",  # Too short
+            role="invalid_role",  # Invalid enum value
+            created_at=datetime.now(timezone.utc)
+        )
 
-def test_test_data_validation():
-    """Test complete test data validation."""
-    test_data_path = os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        "test_data",
-        "test_samples.json"
-    )
-    with open(test_data_path) as f:
-        data = json.load(f)
-    assert validate_test_data(data) is True
-
-
-def test_date_formatting():
-    """Test date handling in schemas."""
-    test_date = datetime(2025, 3, 24, tzinfo=timezone.utc)
-    price_data = {
-        "symbol": "BTC/USD",
-        "price": 50000.00,
-        "timestamp": test_date,
-        "volume": 1000000.00,
-        "high": 51000.00,
-        "low": 49000.00,
-        "open": 49500.00,
-        "close": 50000.00
+def test_validate_test_data():
+    """Test data validation utility."""
+    crypto_data = {
+        "id": "BTC_20240325",
+        "symbol": "BTC",
+        "price": Decimal("65432.10"),
+        "timestamp": datetime.now(timezone.utc),
+        "source": "test_exchange"
     }
+    assert validate_test_data("crypto_prices", crypto_data) is True
 
-    price = CryptoPrice(**price_data)
-    assert isinstance(price.timestamp, datetime)
-    assert price.timestamp == test_date
-    assert price.timestamp.isoformat().replace("+00:00", "Z") == "2025-03-24T00:00:00Z"
+    # Test invalid data type
+    with pytest.raises(ValueError):
+        validate_test_data("invalid_type", {})
+
+    # Test invalid data
+    invalid_data = {
+        "id": "INVALID",
+        "symbol": "B",
+        "price": -100,
+        "timestamp": "invalid_date",
+        "source": ""
+    }
+    assert validate_test_data("crypto_prices", invalid_data) is False
