@@ -1,0 +1,102 @@
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = [
+    "pytest.*",
+    "faker.*",
+    "redis.*"
+]
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv", ".git", "docs"]
+tests = ["B201", "B301"]
+skips = ["B101", "B601"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+filterwarnings = [
+    "ignore::DeprecationWarning:pydantic.*:",
+    "ignore::pytest.PytestDeprecationWarning"
+]
+markers = [
+    "integration: mark test as integration test",
+    "e2e: mark test as end-to-end test",
+    "performance: mark test as performance test"
+]
+addopts = """
+    --verbose
+    --doctest-modules
+    --junitxml=reports/junit.xml
+    --cov=src
+    --cov-report=term-missing
+    --cov-report=html:reports/coverage
+    --cov-branch
+    --no-cov-on-fail
+    --asyncio-mode=strict
+"""
+timeout = 300
+timeout_method = "thread"
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = [
+    "tests/*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+show_missing = true
