@@ -1,14 +1,13 @@
 """Tests for test helper utilities."""
 
-import pytest
-from datetime import datetime, timedelta
+import base64
+import json
+from datetime import datetime, timedelta, timezone
+from typing import Optional
 
-from ..test_helpers import (
-    MockDB,
-    MockRedis,
-    generate_random_string,
-    generate_test_token,
-)
+from ..test_helpers import (MockDB, MockRedis, generate_random_string,
+                            generate_test_token)
+
 
 def test_generate_random_string():
     """Test random string generation."""
@@ -24,6 +23,7 @@ def test_generate_random_string():
     # Test uniqueness
     assert str1 != str2
 
+
 def test_generate_test_token():
     """Test JWT token generation."""
     # Test default token
@@ -31,14 +31,34 @@ def test_generate_test_token():
     assert isinstance(token, str)
     assert len(token.split(".")) == 3
 
+    # Test token payload
+    payload = json.loads(
+        base64.b64decode(token.split(".")[1] + "==").decode("utf-8")
+    )
+    assert "sub" in payload
+    assert "role" in payload
+    assert "exp" in payload
+    assert payload["sub"] == "test_user"
+    assert payload["role"] == "user"
+
     # Test custom user and role
     token = generate_test_token(user_id="custom_user", role="admin")
-    assert "custom_user" in token
-    assert "admin" in token
+    payload = json.loads(
+        base64.b64decode(token.split(".")[1] + "==").decode("utf-8")
+    )
+    assert payload["sub"] == "custom_user"
+    assert payload["role"] == "admin"
 
     # Test expiration
-    token = generate_test_token(exp_minutes=1)
-    assert token is not None
+    exp_minutes = 60
+    token = generate_test_token(exp_minutes=exp_minutes)
+    payload = json.loads(
+        base64.b64decode(token.split(".")[1] + "==").decode("utf-8")
+    )
+    now = int(datetime.now(timezone.utc).timestamp())
+    assert payload["exp"] > now
+    assert payload["exp"] <= now + (exp_minutes * 60)
+
 
 def test_mock_db():
     """Test mock database operations."""
@@ -52,6 +72,7 @@ def test_mock_db():
 
     # Test find_one
     found = db.find_one(collection, {"_id": doc_id})
+    assert found is not None
     assert found["name"] == "test"
     assert found["value"] == 123
 
@@ -68,6 +89,7 @@ def test_mock_db():
     )
     assert updated is True
     found = db.find_one(collection, {"_id": doc_id})
+    assert found is not None
     assert found["value"] == 456
 
     # Test delete_one
@@ -76,20 +98,23 @@ def test_mock_db():
     found = db.find_one(collection, {"_id": doc_id})
     assert found is None
 
+
 def test_mock_redis():
     """Test mock Redis operations."""
     redis = MockRedis()
 
     # Test set/get
     redis.set("key1", "value1")
-    assert redis.get("key1") == "value1"
+    val1: Optional[str] = redis.get("key1")
+    assert val1 == "value1"
 
     # Test expiry
     redis.set("key2", "value2", ex=1)
-    assert redis.get("key2") == "value2"
+    val2: Optional[str] = redis.get("key2")
+    assert val2 == "value2"
 
     # Simulate time passing
-    redis.expires["key2"] = datetime.utcnow() - timedelta(seconds=2)
+    redis.expires["key2"] = datetime.now(timezone.utc) - timedelta(seconds=2)
     assert redis.get("key2") is None
 
     # Test delete

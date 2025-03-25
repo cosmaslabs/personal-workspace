@@ -1,169 +1,113 @@
 # Test Utilities
 
-Common test utilities and helpers for the AI-driven applications suite.
+Helper functions and utilities for testing the project components.
 
-## Overview
+## Structure
 
-This package provides shared testing utilities, fixtures, and data for all projects in the monorepo.
+```
+tests/utils/
+├── __init__.py               # Package initialization
+├── test_config.py           # Test configuration settings
+├── test_helpers.py          # Common test helper functions
+├── test_data/              # Test data and schemas
+│   ├── db_utils.py         # Database utilities
+│   ├── test_schemas.py     # Pydantic models for test data
+│   ├── test_samples.json   # Sample test data
+│   └── test_db_config.json # Database configuration
+└── tests/                  # Tests for utilities
+    ├── test_config_test.py
+    ├── test_helpers_test.py
+    ├── test_data_test.py
+    └── test_db_utils.py
+```
 
 ## Features
 
-- Common test fixtures
+- Database configuration management
+- Redis caching utilities
+- Test data generation and validation
 - Mock database and Redis implementations
-- Test data samples and schemas
-- Authentication helpers
-- API testing utilities
-
-## Installation
-
-From the root directory:
-
-```bash
-pip install -e tests/utils
-```
+- JWT token generation for testing
+- Common test fixtures and helpers
 
 ## Usage
+
+### Configuration
+
+```python
+from tests.utils.test_config import get_test_settings
+
+# Get test settings
+settings = get_test_settings()
+```
+
+### Database Utilities
+
+```python
+from tests.utils.test_data.db_utils import get_db_url, get_redis_url
+
+# Get database URL
+db_url = get_db_url("crypto")
+
+# Get Redis URL
+redis_url = get_redis_url()
+```
 
 ### Test Helpers
 
 ```python
-from test_utils.helpers import (
+from tests.utils.test_helpers import (
     generate_test_token,
     create_test_user,
-    login_test_user
+    MockDB,
+    MockRedis
 )
 
-def test_authentication(client):
-    # Create test user
-    user = create_test_user(client)
+# Generate test JWT token
+token = generate_test_token(user_id="test_user", role="admin")
 
-    # Login and get token
-    token = login_test_user(client)
+# Use mock database
+db = MockDB()
+doc_id = db.insert("collection", {"key": "value"})
 
-    # Make authenticated request
-    response = client.get("/api/protected",
-                         headers={"Authorization": f"Bearer {token}"})
-    assert response.status_code == 200
+# Use mock Redis
+redis = MockRedis()
+redis.set("key", "value", ex=60)
 ```
-
-### Mock Database
-
-```python
-from test_utils.helpers import MockDB
-
-def test_database_operations(mock_db):
-    # Insert test data
-    doc_id = mock_db.insert("users", {"name": "Test User"})
-
-    # Query data
-    user = mock_db.find_one("users", {"_id": doc_id})
-    assert user["name"] == "Test User"
-```
-
-### Mock Redis
-
-```python
-from test_utils.helpers import MockRedis
-
-def test_cache_operations(mock_redis):
-    # Set cache value
-    mock_redis.set("key", "value", ex=60)
-
-    # Get cached value
-    value = mock_redis.get("key")
-    assert value == "value"
-```
-
-### Test Data
-
-```python
-from test_utils.test_data import load_test_data, validate_test_data
-
-def test_with_sample_data():
-    # Load test data
-    data = load_test_data("test_samples.json")
-
-    # Validate data structure
-    assert validate_test_data(data)
-
-    # Use test data
-    crypto_prices = data["crypto_samples"]["prices"]
-    assert len(crypto_prices) > 0
-```
-
-## Directory Structure
-
-```
-utils/
-├── __init__.py
-├── conftest.py           # pytest configuration and fixtures
-├── test_helpers.py       # Common test utilities
-├── setup.py             # Package configuration
-├── README.md            # This file
-└── test_data/          # Test data and schemas
-    ├── test_samples.json
-    └── test_schemas.py
-```
-
-## Configuration
-
-### pytest Markers
-
-Available pytest markers:
-- `integration`: Integration tests
-- `e2e`: End-to-end tests
-- `performance`: Performance tests
-
-Add to `pytest.ini`:
-```ini
-[pytest]
-markers =
-    integration: mark test as integration test
-    e2e: mark test as end-to-end test
-    performance: mark test as performance test
-```
-
-### Environment Variables
-
-Test-specific environment variables:
-- `TESTING=1`: Enables test mode
-- `TEST_DB_URL`: Test database URL
-- `TEST_REDIS_URL`: Test Redis URL
 
 ## Development
 
-### Requirements
+### Installation
 
-- Python 3.9+
-- pytest 6.2+
-- pydantic 1.8+
-
-### Setup
-
-1. Install development dependencies:
-   ```bash
-   pip install -r requirements-dev.txt
-   ```
-
-2. Install package in editable mode:
-   ```bash
-   pip install -e tests/utils
-   ```
-
-### Testing
-
-Run tests for the utilities:
 ```bash
-pytest tests/utils/tests
+# Install dependencies
+pip install -r requirements.txt
+
+# Install development dependencies
+pip install -r requirements-dev.txt
 ```
 
-## Contributing
+### Running Tests
 
-1. Follow project code style
-2. Add tests for new features
-3. Update documentation
-4. Submit pull request
+```bash
+# Run all tests
+pytest tests/utils/tests/
+
+# Run with coverage
+pytest tests/utils/tests/ --cov=tests/utils
+
+# Run specific test file
+pytest tests/utils/tests/test_helpers_test.py
+```
+
+### Contributing
+
+1. Create feature branch: `git checkout -b feature-name`
+2. Make changes and run tests
+3. Format code: `black tests/utils/`
+4. Run linting: `flake8 tests/utils/`
+5. Submit pull request
 
 ## License
 
-Same license as the main project.
+This project is licensed under the MIT License - see the LICENSE file for details.

@@ -6,12 +6,7 @@
             "port": 5432,
             "user": "test_user",
             "password": "test_pass",
-            "tables": [
-                "cryptocurrency_prices",
-                "predictions",
-                "trading_signals",
-                "market_indicators"
-            ]
+            "tables": ["prices", "orders", "trades"]
         },
         "ocr": {
             "name": "ocr_test_db",
@@ -19,12 +14,7 @@
             "port": 5432,
             "user": "test_user",
             "password": "test_pass",
-            "tables": [
-                "documents",
-                "templates",
-                "extracted_data",
-                "processing_jobs"
-            ]
+            "tables": ["documents", "results", "metadata"]
         },
         "analytics": {
             "name": "analytics_test_db",
@@ -32,19 +22,14 @@
             "port": 5432,
             "user": "test_user",
             "password": "test_pass",
-            "tables": [
-                "campaigns",
-                "segments",
-                "metrics",
-                "reports"
-            ]
+            "tables": ["campaigns", "metrics", "reports"]
         }
     },
     "redis": {
         "host": "localhost",
         "port": 6379,
         "db": 1,
-        "password": null,
+        "password": "redis_pass",
         "cache_ttl": 3600,
         "prefix": "test:"
     },
