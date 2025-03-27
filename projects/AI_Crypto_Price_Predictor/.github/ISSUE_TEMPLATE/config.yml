@@ -1,0 +1,55 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/cosmaslabs/personal-workspace/docs
+    about: Check our documentation for answers to common questions
+
+  - name: 💬 Discussions
+    url: https://github.com/cosmaslabs/personal-workspace/discussions
+    about: Ask questions and share ideas about the project
+
+  - name: 🛠 Project Setup Guide
+    url: https://github.com/cosmaslabs/personal-workspace/blob/main/docs/setup.md
+    about: View instructions for setting up the development environment
+
+  - name: 🤝 Contributing Guidelines
+    url: https://github.com/cosmaslabs/personal-workspace/blob/main/CONTRIBUTING.md
+    about: Review our guidelines for contributing to the project
+
+  - name: 🔒 Security Policy
+    url: https://github.com/cosmaslabs/personal-workspace/blob/main/SECURITY.md
+    about: Report security vulnerabilities
+
+  - name: 📊 Project Board
+    url: https://github.com/cosmaslabs/personal-workspace/projects
+    about: View project roadmap and progress
+
+  - name: 💌 Email Support
+    url: mailto:support@cosmaslabs.com
+    about: Contact our support team for urgent issues
+
+labels:
+  - name: "bug"
+    color: "d73a4a"
+    description: "Something isn't working"
+  - name: "documentation"
+    color: "0075ca"
+    description: "Documentation improvements"
+  - name: "enhancement"
+    color: "a2eeef"
+    description: "New feature or request"
+  - name: "help wanted"
+    color: "008672"
+    description: "Extra attention is needed"
+  - name: "question"
+    color: "d876e3"
+    description: "Further information is needed"
+  - name: "security"
+    color: "e11d21"
+    description: "Security related issues"
+  - name: "testing"
+    color: "fbca04"
+    description: "Testing related issues"
+  - name: "wontfix"
+    color: "ffffff"
+    description: "This will not be worked on"

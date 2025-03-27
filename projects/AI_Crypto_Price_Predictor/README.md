@@ -2,13 +2,17 @@
 
 ## Project Overview
 
-An advanced cryptocurrency price prediction system leveraging multiple AI approaches to forecast BTC and ETH prices with approximately 68% accuracy. The system combines traditional deep learning with modern LLM capabilities, integrated with NocoBase for robust data management and API services.
+An advanced cryptocurrency price prediction system leveraging multiple AI
+approaches to forecast BTC and ETH prices with approximately 68% accuracy. The
+system combines traditional deep learning with modern LLM capabilities,
+integrated with NocoBase for robust data management and API services.
 
 ## Technical Architecture
 
 ### Core Components
 
 1. **Data Pipeline**
+
    - CoinGecko API Integration
    - NocoBase data storage & retrieval
    - Real-time data streaming
@@ -16,6 +20,7 @@ An advanced cryptocurrency price prediction system leveraging multiple AI approa
    - Feature engineering pipeline
 
 2. **AI/ML Stack**
+
    - LLM Integration:
      - GitHub Copilot
      - OpenAI GPT API
@@ -42,30 +47,30 @@ An advanced cryptocurrency price prediction system leveraging multiple AI approa
 ```typescript
 // nocobase/plugins/crypto-predictor/src/server.ts
 export default {
-  name: 'crypto-predictor',
+  name: "crypto-predictor",
   async load() {
     // Register custom collections
     this.db.collection({
-      name: 'price_predictions',
+      name: "price_predictions",
       fields: [
         {
-          type: 'string',
-          name: 'cryptocurrency',
+          type: "string",
+          name: "cryptocurrency",
         },
         {
-          type: 'float',
-          name: 'predicted_price',
+          type: "float",
+          name: "predicted_price",
         },
         {
-          type: 'float',
-          name: 'confidence_score',
+          type: "float",
+          name: "confidence_score",
         },
       ],
     });
 
     // Register custom actions
     this.app.resource({
-      name: 'predictions',
+      name: "predictions",
       actions: {
         async predict(ctx) {
           const model = await loadModel();

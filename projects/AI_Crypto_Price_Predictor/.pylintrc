@@ -1,0 +1,157 @@
+[MASTER]
+# Python version
+py-version=3.10
+
+# Files or directories to ignore
+ignore=CVS,tests
+
+# Files or directories matching the regex patterns are skipped
+ignore-patterns=
+    ^\.#,
+    \.pyc$,
+    \.pyo$,
+    \.pyd$
+
+# List of plugins
+load-plugins=
+    pylint.extensions.docparams,
+    pylint.extensions.docstyle,
+    pylint.extensions.bad_builtin,
+    pylint.extensions.check_elif,
+    pylint.extensions.code_style,
+    pylint.extensions.typing
+
+# Use multiple processes for analysis
+jobs=4
+
+# Allow loading modules/packages from anywhere
+ignored-modules=numpy,tensorflow,torch,cv2
+
+[MESSAGES CONTROL]
+# Enable/disable specific messages
+disable=
+    C0111,  # missing-docstring
+    C0103,  # invalid-name
+    C0330,  # bad-continuation (conflicts with black)
+    C0326,  # bad-whitespace (conflicts with black)
+    W0511,  # fixme (TODO comments)
+    R0903,  # too-few-public-methods
+    R0913,  # too-many-arguments
+    R0914,  # too-many-locals
+    W0603,  # global-statement
+    W0703,  # broad-except
+    W0702,  # bare-except
+    W0622,  # redefined-builtin
+    W0621,  # redefined-outer-name
+    W0212,  # protected-access
+    W0221,  # arguments-differ
+    W0201,  # attribute-defined-outside-init
+    W0107,  # unnecessary-pass
+    E1101,  # no-member (often false positives with numpy/pandas)
+    R0801   # duplicate-code
+
+enable=
+    W0611,  # unused-import
+    W0612,  # unused-variable
+    W0613,  # unused-argument
+    W0614,  # unused-wildcard-import
+    W0621,  # redefined-outer-name
+    W0622,  # redefined-builtin
+    W0703,  # broad-except
+    R0911,  # too-many-return-statements
+    R0912,  # too-many-branches
+    R0915   # too-many-statements
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=88
+
+# Maximum number of lines in a module
+max-module-lines=1500
+
+# String used as indentation unit (2 spaces)
+indent-string='    '
+
+[BASIC]
+# Regular expression which should only match function or class names
+function-rgx=[a-z_][a-z0-9_]{2,50}$
+class-rgx=[A-Z_][a-zA-Z0-9]+$
+argument-rgx=[a-z_][a-z0-9_]{2,30}$
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+method-rgx=[a-z_][a-z0-9_]{2,50}$
+
+# Good variable names
+good-names=i,j,k,ex,Run,_,fd,fp,id,df,x,y
+
+[SIMILARITIES]
+# Minimum lines number of a similarity
+min-similarity-lines=6
+
+# Ignore comments when computing similarities
+ignore-comments=yes
+
+# Ignore docstrings when computing similarities
+ignore-docstrings=yes
+
+# Ignore imports when computing similarities
+ignore-imports=yes
+
+[TYPECHECK]
+# List of module names for which member attributes should not be checked
+ignored-modules=numpy,tensorflow,torch,cv2,pandas
+
+# List of classes names for which member attributes should not be checked
+ignored-classes=numpy,tensorflow,torch,cv2,pd.DataFrame,pd.Series
+
+[MISCELLANEOUS]
+# List of note tags to take into consideration
+notes=FIXME,XXX,TODO,HACK,REVIEW
+
+[VARIABLES]
+# A regular expression matching names of dummy variables
+dummy-variables-rgx=_|dummy|unused|temp
+
+# List of additional names to consider as builtins
+additional-builtins=
+
+[IMPORTS]
+# List of modules that can be imported at any level
+allow-any-import-level=cv2,numpy,pandas,tensorflow,torch
+
+[DESIGN]
+# Maximum number of arguments for function / method
+max-args=10
+
+# Maximum number of locals for function / method
+max-locals=20
+
+# Maximum number of return statements
+max-returns=8
+
+# Maximum number of branch for function / method
+max-branches=15
+
+# Maximum number of statements in function / method
+max-statements=50
+
+# Maximum number of parents for a class (see R0901).
+max-parents=7
+
+# Maximum number of attributes for a class (see R0902).
+max-attributes=10
+
+# Minimum number of public methods for a class (see R0903).
+min-public-methods=1
+
+# Maximum number of public methods for a class (see R0904).
+max-public-methods=30
+
+[CLASSES]
+# List of method names used to declare (i.e. assign) instance attributes
+defining-attr-methods=__init__,__new__,setUp,setup
+
+# List of valid names for the first argument in a class method
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method
+valid-metaclass-classmethod-first-arg=mcs

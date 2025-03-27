@@ -1,0 +1,91 @@
+# Dependabot configuration file
+version: 2
+updates:
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "python"
+      - "security"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps(dev)"
+      include: "scope"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "cosmaslabs/maintainers"
+    assignees:
+      - "cosmaslabs/maintainers"
+    versioning-strategy:
+      - "auto"
+      - "lockfile-only"
+    ignore:
+      - dependency-name: "tensorflow*"
+        versions: [">=3.0.0"]
+      - dependency-name: "torch*"
+        versions: [">=3.0.0"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "cosmaslabs/maintainers"
+
+  # Docker base images
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "cosmaslabs/maintainers"
+
+  # Monitoring stack
+  - package-ecosystem: "docker"
+    directory: "/monitoring"
+    schedule:
+      interval: "monthly"
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "monitoring"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    open-pull-requests-limit: 3
+
+pull-request-branch-name:
+  separator: "-"
+
+updates-branch-name:
+  separator: "-"

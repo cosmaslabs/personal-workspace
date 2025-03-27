@@ -1,0 +1,64 @@
+# Default owners for everything in the repo
+* @cosmaslabs/maintainers
+
+# ML model and training code
+/src/models/ @cosmaslabs/ml-team
+/src/models/lstm_transformer.py @cosmaslabs/ml-lead
+/src/models/train.py @cosmaslabs/ml-lead
+
+# Data processing and collection
+/src/data/ @cosmaslabs/data-team
+/src/data/collectors.py @cosmaslabs/data-lead
+/src/data/preprocessor.py @cosmaslabs/data-lead
+
+# API and web services
+/src/api/ @cosmaslabs/backend-team
+/src/api/app.py @cosmaslabs/backend-lead
+
+# Configuration files
+/configs/ @cosmaslabs/devops
+*.yaml @cosmaslabs/devops
+*.yml @cosmaslabs/devops
+
+# Documentation
+/docs/ @cosmaslabs/docs-team
+*.md @cosmaslabs/docs-team
+/README.md @cosmaslabs/maintainers
+
+# Tests
+/tests/ @cosmaslabs/qa-team
+/tests/test_model.py @cosmaslabs/ml-team
+/tests/test_api.py @cosmaslabs/backend-team
+
+# CI/CD and DevOps
+/.github/ @cosmaslabs/devops
+/Dockerfile @cosmaslabs/devops
+/docker-compose.yml @cosmaslabs/devops
+/.pre-commit-config.yaml @cosmaslabs/devops
+
+# Dependencies
+/requirements*.txt @cosmaslabs/devops
+/pyproject.toml @cosmaslabs/devops
+
+# Security-sensitive files
+/.env.example @cosmaslabs/security-team
+/src/api/auth/ @cosmaslabs/security-team
+
+# Monitoring and metrics
+/monitoring/ @cosmaslabs/devops
+/src/api/metrics.py @cosmaslabs/devops
+
+# Database
+/src/db/ @cosmaslabs/backend-team
+*.sql @cosmaslabs/backend-team
+
+# Machine learning pipelines
+/src/pipelines/ @cosmaslabs/ml-team
+
+# Tools and scripts
+/scripts/ @cosmaslabs/devops
+*.sh @cosmaslabs/devops
+
+# Kubernetes manifests
+/k8s/ @cosmaslabs/devops
+*.yaml @cosmaslabs/devops

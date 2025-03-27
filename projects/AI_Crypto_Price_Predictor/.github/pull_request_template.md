@@ -1,11 +1,11 @@
 # Description
 
-Please include a summary of the changes and the related issue. Please also
+Please include a summary of the changes and which issue is fixed. Please also
 include relevant motivation and context.
 
 Fixes # (issue)
 
-## Type of change
+## Type of Change
 
 Please delete options that are not relevant.
 
@@ -13,16 +13,9 @@ Please delete options that are not relevant.
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to
       not work as expected)
+- [ ] This change requires a documentation update
+- [ ] Dependencies update
 - [ ] Documentation update
-- [ ] Configuration change
-
-## Project Affected
-
-- [ ] AI Crypto Price Predictor
-- [ ] Document Digitization OCR System
-- [ ] University Marketing Analytics Tool
-- [ ] NocoBase Backend
-- [ ] Repository/General
 
 ## Checklist
 
@@ -35,28 +28,16 @@ Please delete options that are not relevant.
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
 
-## Additional Information
+## Testing
 
-**Screenshots** (if appropriate):
+Please describe the tests that you ran to verify your changes.
 
-**Testing Instructions** (if applicable):
+```bash
+# Example test commands
+make test
+make test-integration
+```
 
-## Dependencies
+## Additional Notes
 
-List any dependencies that are required for this change:
-
-## Performance Impact
-
-Describe the performance impact of your changes, if any:
-
-## Security Considerations
-
-Describe any security implications of your changes:
-
-## Deployment Notes
-
-Include any notes about deployment of your changes:
-
-## Follow-up Tasks
-
-List any follow-up tasks that need to be done:
+Add any additional notes about the PR here.
